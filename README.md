@@ -59,4 +59,5 @@
 
 ## TODO
 - [ ] 한국예탁결제원 주식 API 연동
+  - https://www.data.go.kr/iim/api/selectAcountList.do
 
