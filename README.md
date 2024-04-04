@@ -58,6 +58,8 @@
 - 조회, 생성, 수정, 삭제
 
 ## TODO
-- [ ] 한국예탁결제원 주식 API 연동
+- [x] 한국예탁결제원 주식 API 연동
   - https://www.data.go.kr/iim/api/selectAcountList.do
+- [ ] 금융위원회 주식발행정보
+  - https://www.data.go.kr/iim/api/selectAPIAcountView.do
 

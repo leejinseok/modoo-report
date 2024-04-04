@@ -9,5 +9,8 @@ dependencies {
     annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties.get("querydsl.version")}:jakarta")
     annotationProcessor("jakarta.annotation:jakarta.annotation-api")
     annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+}
 
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
