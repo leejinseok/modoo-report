@@ -6,11 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.NonTransientResourceException;
-import org.springframework.batch.item.ParseException;
-import org.springframework.batch.item.UnexpectedInputException;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,22 +20,27 @@ public class StockItemReader implements ItemReader<StockResponseDto.ItemDto>, St
     private final StockApi stockApi;
 
     private int CURSOR = 0;
-    private List<StockResponseDto.ItemDto> items = new ArrayList<>();
-
+    private final List<StockResponseDto.ItemDto> items = new ArrayList<>();
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
-        StockResponseDto dto = stockApi.fetchStock("", 20000);
-        StockResponseDto.ResponseDto response = dto.getResponse();
-        StockResponseDto.BodyDto body = response.getBody();
-        List<StockResponseDto.ItemDto> item = body.getItems().getItem();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String baseDt = currentDate.format(formatter);
+
+        StockResponseDto dto = stockApi.fetchStock("", 20000, baseDt);
+        List<StockResponseDto.ItemDto> item = dto.getResponse()
+                .getBody()
+                .getItems()
+                .getItem();
+
         items.clear();
         items.addAll(item);
     }
 
 
     @Override
-    public StockResponseDto.ItemDto read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
+    public StockResponseDto.ItemDto read() {
         if (CURSOR >= items.size()) {
             return null;
         }

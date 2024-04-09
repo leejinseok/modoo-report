@@ -36,7 +36,7 @@ public class StockJobConfiguration {
     @Bean
     public Step fetchStockTaskletStep() {
         return new StepBuilder("fetchStockTaskletStep", jobRepository)
-                .<StockResponseDto.ItemDto, Stock>chunk(2, platformTransactionManager)
+                .<StockResponseDto.ItemDto, Stock>chunk(10, platformTransactionManager)
                 .reader(stockItemReader)
                 .processor(stockItemProcessor)
                 .writer(fetchStockJpaItemWriter())

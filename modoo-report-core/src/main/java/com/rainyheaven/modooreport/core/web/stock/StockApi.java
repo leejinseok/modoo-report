@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 
 @Component
 public class StockApi {
@@ -22,16 +23,16 @@ public class StockApi {
         this.serviceKey = serviceKey;
     }
 
-    public StockResponseDto fetchStock(final String query, final int numOfRow) {
+    public StockResponseDto fetchStock(final String query, final int numOfRows, final String baseDt) {
         String queryEncoded = URLEncoder.encode(query, StandardCharsets.UTF_8);
         String serviceKeyEncoded = URLEncoder.encode(serviceKey, StandardCharsets.UTF_8);
         String builder = "https://apis.data.go.kr/1160100/service/GetStocIssuInfoService_V2/getItemBasiInfo_V2?serviceKey=" + serviceKeyEncoded +
                 "&pageNo=1" +
-                "&numOfRow=" + numOfRow +
+                "&numOfRows=" + numOfRows +
+                "&baseDt=" + baseDt +
                 "&resultType=json" +
                 "&stckIssuCmpyNm=" + queryEncoded;
         ResponseEntity<StockResponseDto> forEntity = restTemplate.getForEntity(
-
                 builder, StockResponseDto.class);
         return forEntity.getBody();
     }
