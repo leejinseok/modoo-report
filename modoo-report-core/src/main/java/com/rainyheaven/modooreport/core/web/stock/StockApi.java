@@ -22,22 +22,18 @@ public class StockApi {
         this.serviceKey = serviceKey;
     }
 
-    public StockResponseDto fetchStock(final String query) {
+    public StockResponseDto fetchStock(final String query, final int numOfRow) {
         String queryEncoded = URLEncoder.encode(query, StandardCharsets.UTF_8);
         String serviceKeyEncoded = URLEncoder.encode(serviceKey, StandardCharsets.UTF_8);
-        StringBuilder builder = new StringBuilder("https://apis.data.go.kr/1160100/service/GetStocIssuInfoService_V2/getItemBasiInfo_V2");
-        builder.append("?serviceKey=").append(serviceKeyEncoded);
-        builder.append("&pageNo=1");
-        builder.append("&numOfRow=1");
-        builder.append("&resultType=json");
-        builder.append("&stckIssuCmpyNm=").append(queryEncoded);
-        try {
-            ResponseEntity<StockResponseDto> forEntity = restTemplate.getForEntity(builder.toString(), StockResponseDto.class);
-            return forEntity.getBody();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        String builder = "https://apis.data.go.kr/1160100/service/GetStocIssuInfoService_V2/getItemBasiInfo_V2?serviceKey=" + serviceKeyEncoded +
+                "&pageNo=1" +
+                "&numOfRow=" + numOfRow +
+                "&resultType=json" +
+                "&stckIssuCmpyNm=" + queryEncoded;
+        ResponseEntity<StockResponseDto> forEntity = restTemplate.getForEntity(
+
+                builder, StockResponseDto.class);
+        return forEntity.getBody();
     }
 
 }

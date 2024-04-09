@@ -15,13 +15,13 @@ public class StockResponseDto {
 
     @Getter
     @Setter
-    static class ResponseDto {
+    public static class ResponseDto {
         private BodyDto body;
     }
 
     @Getter
     @Setter
-    static class BodyDto {
+    public static class BodyDto {
         private ItemsDto items;
         private Integer numOfRows;
         private Integer pageNo;
@@ -30,13 +30,13 @@ public class StockResponseDto {
 
     @Getter
     @Setter
-    static class ItemsDto {
+    public static class ItemsDto {
         private List<ItemDto> item = new ArrayList<>();
     }
 
     @Getter
     @Setter
-    static class ItemDto {
+    public static class ItemDto {
         private String basDt;
         private String crno;
         private String isinCd;

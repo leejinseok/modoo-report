@@ -25,5 +25,4 @@ public class Report extends AuditingDomain {
     @Column(nullable = false)
     private String content;
 
-
 }

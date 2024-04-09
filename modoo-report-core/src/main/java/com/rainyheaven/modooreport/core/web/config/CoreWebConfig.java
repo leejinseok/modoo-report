@@ -9,7 +9,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 @Configuration
 @Import({StockApi.class})
-public class WebConfig {
+public class CoreWebConfig {
 
     @Bean
     public RestTemplate restTemplate() {

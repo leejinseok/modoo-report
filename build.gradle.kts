@@ -26,9 +26,10 @@ allprojects {
 }
 
 val apiProject = project(":modoo-report-api")
+val batchProject = project(":modoo-report-batch")
 val coreProject = project(":modoo-report-core")
 
-val springProjects = listOf(apiProject, coreProject)
+val springProjects = listOf(apiProject, batchProject, coreProject)
 
 configure(springProjects) {
     apply {
