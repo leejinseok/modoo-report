@@ -9,4 +9,11 @@ public class Phone {
     private String secondNumber;
     private String thirdNumber;
 
+    public Phone() {}
+
+    public Phone(final String firstNumber, final String secondNumber, final String thirdNumber) {
+        this.firstNumber = firstNumber;
+        this.secondNumber = secondNumber;
+        this.thirdNumber = thirdNumber;
+    }
 }

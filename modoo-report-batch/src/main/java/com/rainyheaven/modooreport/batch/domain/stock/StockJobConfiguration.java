@@ -26,28 +26,28 @@ public class StockJobConfiguration {
     private final StockItemReader stockItemReader;
     private final StockItemProcessor stockItemProcessor;
 
-    @Bean
-    public Job fetchStockJob() {
-        return new JobBuilder("fetchStockJob", jobRepository)
-                .start(fetchStockTaskletStep())
-                .build();
-    }
-
-    @Bean
-    public Step fetchStockTaskletStep() {
-        return new StepBuilder("fetchStockTaskletStep", jobRepository)
-                .<StockResponseDto.ItemDto, Stock>chunk(10, platformTransactionManager)
-                .reader(stockItemReader)
-                .processor(stockItemProcessor)
-                .writer(fetchStockJpaItemWriter())
-                .build();
-    }
-
-    @Bean
-    public JpaItemWriter<Stock> fetchStockJpaItemWriter() {
-        return new JpaItemWriterBuilder<Stock>()
-                .entityManagerFactory(entityManagerFactory)
-                .build();
-    }
+//    @Bean
+//    public Job fetchStockJob() {
+//        return new JobBuilder("fetchStockJob", jobRepository)
+//                .start(fetchStockTaskletStep())
+//                .build();
+//    }
+//
+//    @Bean
+//    public Step fetchStockTaskletStep() {
+//        return new StepBuilder("fetchStockTaskletStep", jobRepository)
+//                .<StockResponseDto.ItemDto, Stock>chunk(10, platformTransactionManager)
+//                .reader(stockItemReader)
+//                .processor(stockItemProcessor)
+//                .writer(fetchStockJpaItemWriter())
+//                .build();
+//    }
+//
+//    @Bean
+//    public JpaItemWriter<Stock> fetchStockJpaItemWriter() {
+//        return new JpaItemWriterBuilder<Stock>()
+//                .entityManagerFactory(entityManagerFactory)
+//                .build();
+//    }
 
 }
