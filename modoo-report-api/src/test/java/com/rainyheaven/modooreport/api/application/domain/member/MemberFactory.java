@@ -1,6 +1,7 @@
-package com.rainyheaven.modooreport.core.db.domain.member;
+package com.rainyheaven.modooreport.api.application.domain.member;
 
 import com.rainyheaven.modooreport.core.db.domain.common.Phone;
+import com.rainyheaven.modooreport.core.db.domain.member.Member;
 
 public class MemberFactory {
 
@@ -15,5 +16,5 @@ public class MemberFactory {
                 .password("password")
                 .build();
     }
-
+    
 }
