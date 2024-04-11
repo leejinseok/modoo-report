@@ -16,4 +16,25 @@ spring:
     hibernate:
       ddl-auto: create
 
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem://localhost/~/modoo-report-test
+      driver-class-name: org.h2.Driver
+      username: sa
+      password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
 

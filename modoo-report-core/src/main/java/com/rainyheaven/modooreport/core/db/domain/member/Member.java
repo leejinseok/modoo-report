@@ -36,4 +36,5 @@ public class Member extends AuditingDomain {
     private Phone phone;
 
 
+
 }
