@@ -20,8 +20,8 @@ public class MemberResponse {
     @Schema(example = "김주식")
     private String name;
 
-    @Schema(example = "lezhin@lezhin.com")
-    private String userEmail;
+    @Schema(example = "sample@sample.com")
+    private String email;
 
     private LocalDateTime createdDateTime;
 
