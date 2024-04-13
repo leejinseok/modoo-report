@@ -4,7 +4,6 @@ import com.rainyheaven.modooreport.core.CoreTestConfiguration;
 import com.rainyheaven.modooreport.core.db.domain.member.Member;
 import com.rainyheaven.modooreport.core.db.domain.member.MemberFactory;
 import com.rainyheaven.modooreport.core.db.domain.member.MemberRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +44,5 @@ class ReportQueryDslRepositoryTest {
         assertThat(page.getTotalElements()).isEqualTo(1);
         assertThat(page.getContent().getFirst().getId()).isEqualTo(report.getId());
     }
-
 
 }

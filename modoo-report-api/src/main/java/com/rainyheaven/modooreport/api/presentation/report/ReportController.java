@@ -6,6 +6,7 @@ import com.rainyheaven.modooreport.api.presentation.common.dto.PageResponse;
 import com.rainyheaven.modooreport.api.presentation.report.dto.ReportRequest;
 import com.rainyheaven.modooreport.api.presentation.report.dto.ReportResponse;
 import com.rainyheaven.modooreport.core.db.domain.report.Report;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +25,19 @@ public class ReportController {
 
     private final ReportService reportService;
 
+    @Operation(summary = "레포트 생성", description = "레포트 생성")
     @PostMapping
-    public ResponseEntity<ReportResponse> save(@RequestBody final ReportRequest request, @AuthenticationPrincipal final MemberToken memberToken) {
+    public ResponseEntity<ReportResponse> save(
+            @RequestBody final ReportRequest request,
+            @AuthenticationPrincipal final MemberToken memberToken
+    ) {
         Report save = reportService.save(request, memberToken.getId());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ReportResponse.create(save));
     }
 
+    @Operation(summary = "레포트 조회 (page)", description = "레포트 조회 (page)")
     @GetMapping
     public ResponseEntity<PageResponse<ReportResponse>> findPage(
             @Parameter(name = "query") @RequestParam(defaultValue = "") final String query,
@@ -45,5 +51,18 @@ public class ReportController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(body);
+    }
+
+    @Operation(summary = "레포트 수정", description = "레포트 수정")
+    @PatchMapping("/{reportId}")
+    public ResponseEntity<ReportResponse> update(
+            @PathVariable final long reportId,
+            @RequestBody final ReportRequest request,
+            @AuthenticationPrincipal final MemberToken memberToken
+    ) {
+        Report update = reportService.update(reportId, request, memberToken.getId());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ReportResponse.create(update));
     }
 }

@@ -1,5 +1,7 @@
 package com.rainyheaven.modooreport.api.application.domain.report;
 
+import com.rainyheaven.modooreport.api.exception.ExceptionConstants;
+import com.rainyheaven.modooreport.api.exception.NoPermissionException;
 import com.rainyheaven.modooreport.api.exception.NotFoundException;
 import com.rainyheaven.modooreport.api.presentation.report.dto.ReportRequest;
 import com.rainyheaven.modooreport.core.db.domain.member.Member;
@@ -42,6 +44,25 @@ public class ReportService {
                 .build();
 
         return reportRepository.save(report);
+    }
+
+    @Transactional
+    public Report update(long reportId, ReportRequest request, final long memberId) {
+        Report report = reportRepository.findById(reportId)
+                .orElseThrow(() -> new NotFoundException(ExceptionConstants.NOT_FOUND_REPORT_MESSAGE.formatted(reportId)));
+
+        if (!report.authorCheck(memberId)) {
+            throw new NoPermissionException("해당 레포트를 수정할 권한이 없습니다.");
+        }
+
+        report.update(
+                request.getTitle(),
+                request.getContent(),
+                request.getTargetPrice(),
+                request.getRecommended()
+        );
+
+        return report;
     }
 
 }

@@ -38,4 +38,20 @@ public class Report extends AuditingDomain {
     @JoinColumn(name = "author_id", foreignKey = @ForeignKey(name = "fk_report_1"))
     private Member author;
 
+    public void update(
+            final String title,
+            final String content,
+            final BigDecimal targetPrice,
+            final Recommended recommended
+    ) {
+        this.title = title;
+        this.content = content;
+        this.targetPrice = targetPrice;
+        this.recommended = recommended;
+    }
+
+    public boolean authorCheck(final long authorId) {
+        return author.getId().equals(authorId);
+    }
+
 }
